@@ -1,0 +1,51 @@
+<html>
+
+<head>
+  <style>
+    #container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .node {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+      margin: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <input type="number" value="1" min="1" max="10000" id="amount">
+    <button onclick="createNodes()">Create detached nodes</button>
+    <button onclick="cleanContainer()">Clean container</button>
+  </div>
+  <div id="container">
+  </div>
+
+  <script>
+    let container = document.getElementById("container");
+    let amount = document.getElementById("amount");
+    let memoryLeak = [];
+
+    function createNodes() {
+      const number = parseInt(amount.value);
+
+      for (let i = 0; i < number; i++) {
+        const element = document.createElement('div');
+        element.innerText = 'Hello! - ' + memoryLeak.length;
+        element.classList.add('node');
+        container.appendChild(element);
+        memoryLeak.push(element);
+      }
+    }
+
+    function cleanContainer() {
+      container.innerHTML = '';
+    }
+  </script>
+</body>
+
+</html>
